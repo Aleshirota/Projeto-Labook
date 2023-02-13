@@ -3,11 +3,13 @@ export class User {
 		private id: string,
 		private name: string,
 		private email: string,
+		private password: string,
 		private role: string,
-        private createdAT: string) 
+        private created_at: string) 
         {
 
         }
+
 
 	public getId = (): string => {
 		return this.id
@@ -32,6 +34,13 @@ export class User {
 	public setEmail = (newEmail: string): void => {
 		this.email = newEmail
 	}
+	public getPassword = (): string => {
+		return this.password
+	}
+
+	public setPassword = (newPassword: string): void => {
+		this.password = newPassword
+	}
 
     public getRole = (): string => {
 		return this.role
@@ -41,12 +50,12 @@ export class User {
 		this.role = newRole
 	}
 
-    public getCreatedAT = (): string => {
-		return this.createdAT
+    public getCreated_at = (): string => {
+		return this.created_at
 	}
 
-	public setCreatedAT = (newCreatedAT: string): void => {
-		this.createdAT = newCreatedAT
+	public setCreated_at = (newCreatedAT: string): void => {
+		this.created_at = newCreatedAT
 	}
 	
 }

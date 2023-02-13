@@ -14,9 +14,9 @@ CREATE TABLE posts (
   content TEXT NOT NULL,
   likes INTEGER NOT NULL,
   dislikes INTEGER NOT NULL,
-  created_at TEXT NOT NULL,
-  updated_at TEXT NOT NULL,
-  FOREIGN KEY (creator_id) REFERENCES users (id)
+  created_at TEXT DEFAULT (DATETIME()) NOT NULL,
+  updated_at TEXT DEFAULT (DATETIME()) NOT NULL
+  -- FOREIGN KEY (creator_id) REFERENCES users (id)
 );
 
 CREATE TABLE likes_dislikes (
@@ -32,12 +32,12 @@ VALUES
 	("u001", "Fulano", "fulano@email.com", "fulano123", "Analista","12/12/2023"),
 	("u002", "Beltrana", "beltrana@email.com", "beltrana00", "Juridico","24/08/2020");
 
-  INSERT INTO posts (id, creator_id, content, likes, dislikes, created_at, updated_at)
+  INSERT INTO posts (id, creator_id, content, likes, dislikes)
 VALUES
-	("p001","u001","Hoje vou estudar POO!",1, 4,"2023-01-20T12:11:47:000Z", "2023-01-20T13:11:47:000Z"),
-	("p002","u002","Hoje vou viajar",3, 2,"2023-01-20T12:11:32:000Z", "2023-01-20T13:12:47:000Z"),
-  ("p003","u002","Vou pra casa da minha mãe",3, 2,"2023-01-20T12:11:32:000Z", "2023-01-20T13:12:47:000Z"),
-  ("p004","u002","Hoje vou viajar para Bahia",3, 2,"2023-01-20T12:11:32:000Z", "2023-01-20T13:12:47:000Z");
+	("p001","u001","Hoje vou estudar POO!",1, 4),
+	("p002","u002","Hoje vou viajar",3, 2),
+  ("p003","u002","Vou pra casa da minha mãe",3, 2),
+  ("p004","u002","Hoje vou viajar para Bahia",3, 2);
 
   INSERT INTO likes_dislikes (user_id, post_id,like)
 VALUES

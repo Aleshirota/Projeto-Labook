@@ -3,13 +3,11 @@ export class Post {
 		private id: string,
 		private creator_id: string,
 		private content: string,
-		private likes: string,
-        private dislikes: string,
-        private createdAt: string,
-        private updatedAt: string) 
-        {
-
-        }
+		private likes: number,
+        private dislikes: number,
+        private created_at: string,
+        private updated_at: string
+		) {}
 
 	public getId = (): string => {
 		return this.id
@@ -35,36 +33,36 @@ export class Post {
 		this.content = newContent
 	}
 
-    public getLikes = (): string => {
+    public getLikes = (): number => {
 		return this.likes
 	}
 
-	public setLikes = (newLikes: string): void => {
+	public setLikes = (newLikes: number): void => {
 		this.likes = newLikes
 	}
 
-    public getDislikes = (): string => {
+    public getDislikes = (): number => {
 		return this.dislikes
 	}
 
-	public setDislikes = (newDislikes: string): void => {
+	public setDislikes = (newDislikes: number): void => {
 		this.dislikes = newDislikes
 	}
 	
     public getCreatedAt = (): string => {
-		return this.createdAt
+		return this.created_at
 	}
 
 	public setCreatedAt = (newCreatedAt: string): void => {
-		this.createdAt = newCreatedAt
+		this.created_at = newCreatedAt
 	}
 	
     public getUpdatedAt = (): string => {
-		return this.updatedAt
+		return this.updated_at
 	}
 
 	public setUpdatedAt = (newUpdatedAt: string): void => {
-		this.updatedAt = newUpdatedAt
+		this.updated_at = newUpdatedAt
 	}
 	
 }
