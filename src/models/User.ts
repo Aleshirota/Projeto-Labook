@@ -1,14 +1,14 @@
+import { USER_ROLES } from "../services/TokenManager"
+
 export class User {
 	constructor(
 		private id: string,
 		private name: string,
 		private email: string,
 		private password: string,
-		private role: string,
-        private created_at: string) 
-        {
-
-        }
+		private role: USER_ROLES,
+        private created_at: string
+		) {}
 
 
 	public getId = (): string => {
@@ -42,11 +42,11 @@ export class User {
 		this.password = newPassword
 	}
 
-    public getRole = (): string => {
+    public getRole = (): USER_ROLES => {
 		return this.role
 	}
 
-	public setRole = (newRole: string): void => {
+	public setRole = (newRole: USER_ROLES): void => {
 		this.role = newRole
 	}
 

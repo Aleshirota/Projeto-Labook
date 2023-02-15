@@ -1,3 +1,8 @@
+export enum USER_ROLES {
+    NORMAL = "NORMAL",
+    ADMIN = "ADMIN"
+}
+
 export type TPostDB = {
     id: string,
     creator_id: string,
@@ -13,7 +18,7 @@ export type TUserDB = {
     name: string,
     email: string,
     password: string,
-    role: string,
+    role: USER_ROLES,
     created_at: string
    
 }
