@@ -1,4 +1,4 @@
--- Active: 1674684971134@@127.0.0.1@3306
+-- Active: 1676456424549@@127.0.0.1@3306
 CREATE TABLE users (
   id TEXT PRIMARY KEY UNIQUE NOT NULL,
   name TEXT NOT NULL,
@@ -29,8 +29,8 @@ CREATE TABLE likes_dislikes (
 
 INSERT INTO users (id, name, email, password, role, created_at)
 VALUES
-	("u001", "Fulano", "fulano@email.com", "fulano123", "Analista","12/12/2023"),
-	("u002", "Beltrana", "beltrana@email.com", "beltrana00", "Juridico","24/08/2020");
+	("u001", "Fulano", "fulano@email.com", "fulano123", "NORMAL","12/12/2023"),
+	("u002", "Beltrana", "beltrana@email.com", "beltrana00", "ADMIN","24/08/2020");
 
   INSERT INTO posts (id, creator_id, content, likes, dislikes)
 VALUES
