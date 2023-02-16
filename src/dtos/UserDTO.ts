@@ -6,8 +6,8 @@ import { IdGenerator } from "../services/IdGenerator"
 export interface SignupUserInputDTO {
     name: string,
     email: string,
-    password: string,
-    role: string
+    password: string
+    // role: string
 
 }
 
@@ -59,8 +59,8 @@ export class UserDTO {
 public signupUserInput(
     name: unknown,
     email: unknown,
-    password: unknown,
-    role: unknown
+    password: unknown
+    // role: unknown
     
 ): SignupUserInputDTO {
 
@@ -75,17 +75,17 @@ public signupUserInput(
         throw new BadRequestError("'password' deve ser string")
     }
 
-        if (typeof role !== "string") {
-            throw new BadRequestError("'role' deve ser string")
-        }
+        // if (typeof role !== "string") {
+        //     throw new BadRequestError("'role' deve ser string")
+        // }
         
 
 const dto: SignupUserInputDTO ={
 
     name,
     email,
-    password,
-    role
+    password
+    // role
     
 }
 

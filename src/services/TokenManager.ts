@@ -12,7 +12,7 @@ export enum USER_ROLES {
 // essa interface também pode ser alocada para outro arquivo
 export interface TokenPayload {
     id: string,
-		name: string,
+	name: string,
     role: USER_ROLES
 }
 

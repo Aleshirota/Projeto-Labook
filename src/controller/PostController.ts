@@ -1,5 +1,5 @@
 import { PostBusiness } from "../business/PostBusiness"
-import { PostDTO } from "../dtos/PostDTO"
+import { CreatePostInputDTO, DeletePostInputDTO, EditPostInputDTO, GetPostsInputDTO} from "../dtos/PostDTO"
 import { Request, Response } from "express"
 import { BaseError } from "../errors/BaseError"
 
@@ -7,14 +7,16 @@ import { BaseError } from "../errors/BaseError"
 export class PostController {
 
     constructor(
-        private postDTO: PostDTO,
         private postBusiness: PostBusiness
     ){}
 
     public getPost = async (req: Request, res: Response) => {
+
+
         try {
-            const input = {
-                q: req.query.q
+            const input: GetPostsInputDTO = {
+            
+                token: req.headers.authorization
             }
 
             const output = await this.postBusiness.getPosts(input)
@@ -33,22 +35,16 @@ export class PostController {
 
     public createPost = async (req: Request, res: Response) => {
         try {
-           
-            const input = this.postDTO.createPostInput(
-                req.body.id,
-                req.body.creator_id,
-                req.body.content,
-                req.body.likes,
-                req.body.dislikes
-               
-            )
+            const input: CreatePostInputDTO = {
+                token: req.headers.authorization,
+                name: req.body.name
+            }
 
-            const output = await this.postBusiness.createPost(input)
+            await this.postBusiness.createPost(input)
 
-            res.status(201).send(output)
+            res.status(201).end()
         } catch (error) {
             console.log(error)
-
             if (error instanceof BaseError) {
                 res.status(error.statusCode).send(error.message)
             } else {
@@ -57,24 +53,19 @@ export class PostController {
         }
     }
 
+
     public editPost = async (req: Request, res: Response) => {
         try {
-        
+            const input: EditPostInputDTO = {
+                idToEdit: req.params.id,
+                name: req.body.name,
+                token: req.headers.authorization
+            }
 
-            const input = this.postDTO.editPostInput(
-                req.params.id,
-                req.body.newId,
-                req.body.creator_id,
-                req.body.content,
-                req.body.likes,
-                req.body.dislikes,
-                req.body.created_at,
-                req.body.updated_at
-            )
+            await this.postBusiness.editPost(input)
 
-            const output = await this.postBusiness.editPost(input)
-
-            res.status(200).send(output)
+            res.status(200).end()
+            
         } catch (error) {
             console.log(error)
 
@@ -89,8 +80,9 @@ export class PostController {
     public deletePost = async (req: Request, res: Response) => {
         try {
 
-            const input = {
-                idToDelete: req.params.id
+            const input: DeletePostInputDTO = {
+                idToDelete: req.params.id,
+                token: req.headers.authorization
             }
 
             const output = await this.postBusiness.deletePost(input)
