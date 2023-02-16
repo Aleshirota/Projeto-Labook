@@ -1,12 +1,15 @@
+import { PostModel, TPostDB } from "../types"
+
 export class Post {
 	constructor(
 		private id: string,
-		private creator_id: string,
 		private content: string,
 		private likes: number,
         private dislikes: number,
         private created_at: string,
-        private updated_at: string
+        private updated_at: string,
+		private creator_id: string,
+		private creatorName: string,
 		) {}
 
 	public getId = (): string => {
@@ -64,5 +67,41 @@ export class Post {
 	public setUpdatedAt = (newUpdatedAt: string): void => {
 		this.updated_at = newUpdatedAt
 	}
+
+	public getCreatorName(): string {
+        return this.creatorName
+    }
+
+    public setCreatorName(value: string): void {
+        this.creatorName = value
+    }
 	
+	public toDBModel(): TPostDB {
+        return {
+            id: this.id,
+            creator_id: this.creator_id,
+            content: this.content,
+            likes: this.likes,
+            dislikes: this.dislikes,
+            created_at: this.created_at,
+            updated_at: this.updated_at
+        }
+    }
+
+    public toBusinessModel(): PostModel {
+        return {
+            id: this.id,
+            content: this.content,
+            likes: this.likes,
+            dislikes: this.dislikes,
+            created_at: this.created_at,
+            updated_at: this.updated_at,
+            creator: {
+                id: this.creator_id,
+                name: this.creatorName
+            }
+        }
+    }
+
 }
+

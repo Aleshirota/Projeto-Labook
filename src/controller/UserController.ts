@@ -17,8 +17,8 @@ export class UserController {
                 // req.body.id,
                 req.body.name,
                 req.body.email,
-                req.body.password,
-                req.body.role
+                req.body.password
+                // req.body.role
               
             )
         
