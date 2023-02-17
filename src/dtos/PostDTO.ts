@@ -45,7 +45,7 @@ export interface DeletePostInputDTO {
     token: string | undefined
 }
 
-export interface LikeOrDislikePOstInputDTO {
+export interface LikeDislikePostInputDTO {
     idToLikeOrDislike: string,
     token: string | undefined,
     like: unknown
