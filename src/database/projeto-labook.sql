@@ -47,10 +47,10 @@ VALUES
 
   INSERT INTO likes_dislikes (user_id, post_id,like)
 VALUES
-	("u001", "p001",4),
+	("u001", "p001",1),
 	("u002", "p002",1),
-	("u001", "p003",2),
-	("u002", "p003",3);
+	("u001", "p003",1),
+	("u002", "p003",0);
 
   SELECT * FROM users;
 SELECT * FROM posts;

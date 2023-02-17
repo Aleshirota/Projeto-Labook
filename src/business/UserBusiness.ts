@@ -3,6 +3,7 @@ import { LoginInput, LoginOutput, LoginUserInputDTO, SignupOutput, SignupUserInp
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundError"
 import { User } from "../models/User"
+import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager, TokenPayload, USER_ROLES } from "../services/TokenManager"
 import { TUserDB } from "../types"
@@ -13,7 +14,8 @@ export class UserBusiness {
         private userDTO: UserDTO,
         private userDatabase: UserDatabase,
         private idGenerator: IdGenerator,
-        private tokenManager: TokenManager
+        private tokenManager: TokenManager,
+        private hashManager: HashManager
     ) { }
 
 
@@ -31,12 +33,12 @@ export class UserBusiness {
 
 
         const id = this.idGenerator.generate()
-
+        const hashedPassword = await this.hashManager.hash(password)
         const newUser = new User(
             id,
             name,
             email,
-            password,
+            hashedPassword,
             USER_ROLES.NORMAL,
             new Date().toISOString()
         )
@@ -89,6 +91,23 @@ export class UserBusiness {
             throw new BadRequestError("'email' ou 'password' incorretos")
         }
 
+        // const user = new User(
+        //     userDB.id,
+        //     userDB.name,
+        //     userDB.email,
+        //     userDB.password,
+        //     userDB.role,
+        //     userDB.created_at
+        // )
+        // const hashedPassword = user.getPassword()
+
+        // const isPasswordCorrect = await this.hashManager
+        //     .compare(password, hashedPassword)
+        
+        // if (!isPasswordCorrect) {
+        //     throw new BadRequestError("'password' incorreto")
+        // }
+
         const TokenPayload: TokenPayload = {
 
             id: userDB.id,
@@ -103,8 +122,6 @@ export class UserBusiness {
             message: "Login realizado com sucesso",
             token: token
         }
-
-
 
         return output
     }
